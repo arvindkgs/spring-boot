@@ -4,15 +4,15 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
-    xmlns:oomph="http://www.eclipse.org/buildship/oomph/1.0"
+    xmlns:maven="http://www.eclipse.org/oomph/setup/maven/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xmlns:workingsets="http://www.eclipse.org/oomph/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/buildship/oomph/1.0 https://raw.githubusercontent.com/eclipse/buildship/master/org.eclipse.buildship.oomph/model/GradleImport-1.0.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
-    name="spring.boot.2.4.x"
-    label="Spring Boot 2.4.x">
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/maven/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Maven.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
+    name="spring.boot"
+    label="Spring Boot">
   <setupTask
       xsi:type="setup:VariableTask"
       type="FOLDER"
@@ -55,11 +55,22 @@
   <setupTask
       xsi:type="setup.p2:P2Task">
     <requirement
+        name="epp.package.java"
+        versionRange="[4.5.0,4.6.0)"/>
+    <requirement
         name="org.eclipse.platform.feature.group"/>
     <requirement
         name="org.eclipse.jdt.feature.group"/>
     <requirement
-        name="io.spring.javaformat.eclipse.feature.feature.group"/>
+        name="AnyEditTools.feature.group"/>
+    <requirement
+        name="org.eclipse.m2e.maveneclipse.feature.feature.group"/>
+    <requirement
+        name="org.springframework.ide.eclipse.boot.dash.feature.feature.group"/>
+    <requirement
+        name="org.springframework.ide.eclipse.feature.feature.group"/>
+    <requirement
+        name="org.springframework.ide.eclipse.maven.feature.feature.group"/>
     <requirement
         name="org.eclipse.jst.server_adapters.feature.feature.group"/>
     <requirement
@@ -67,47 +78,52 @@
     <requirement
         name="org.eclipse.jst.server_ui.feature.feature.group"/>
     <requirement
-        name="org.eclipse.jst.web_ui.feature.feature.group"/>
-    <requirement
-        name="org.eclipse.m2e.feature.feature.group"/>
-    <requirement
-        name="org.eclipse.oomph.setup.maven.feature.group"/>
-    <requirement
-        name="org.eclipse.oomph.setup.workingsets.feature.group"/>
-    <requirement
         name="org.eclipse.wst.server_adapters.feature.feature.group"/>
+    <requirement
+        name="org.eclipse.jst.web_ui.feature.feature.group"/>
     <requirement
         name="org.eclipse.wst.web_ui.feature.feature.group"/>
     <requirement
         name="org.sonatype.m2e.buildhelper.feature.feature.group"/>
     <requirement
-        name="org.springframework.boot.ide.main.feature.feature.group"/>
+        name="org.eclipse.mylyn.github.feature.feature.group"/>
     <requirement
-        name="org.springframework.ide.eclipse.boot.dash.feature.feature.group"/>
-    <requirement
-        name="org.springframework.tooling.boot.ls.feature.feature.group"/>
-    <requirement
-        name="org.eclipse.buildship.feature.group"/>
-    <requirement
-        name="org.eclipse.buildship.oomph.feature.group"/>
+        name="org.springframework.ide.eclipse.jdt.formatter.feature.feature.group"/>
     <repository
-        url="https://dl.bintray.com/spring/javaformat-eclipse/"/>
+        url="http://download.eclipse.org/technology/epp/packages/mars/R"/>
     <repository
-        url="https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-buildhelper/0.15.0/N/0.15.0.201405280027/"/>
+        url="http://download.eclipse.org/releases/mars"/>
     <repository
-        url="https://download.springsource.com/release/TOOLS/sts4/update/latest/"/>
+        url="http://andrei.gmxhome.de/eclipse"/>
     <repository
-        url="https://download.eclipse.org/buildship/updates/e411/releases/"/>
+        url="https://dl.bintray.com/philwebb/m2eclipse-maveneclipse"/>
+    <repository
+        url="https://dl.bintray.com/philwebb/spring-eclipse-code-formatter"/>
+    <repository
+        url="http://dist.springsource.com/release/TOOLS/update/e4.5"/>
+    <repository
+        url="http://download.eclipse.org/egit/github/updates/"/>
     <description>
       Install the tools needed in the IDE to work with the
       source code for ${scope.project.label}
     </description>
   </setupTask>
   <setupTask
-      xsi:type="oomph:GradleImportTask">
+      xsi:type="maven:MavenImportTask"
+      id="">
     <sourceLocator
-        rootFolder="${checkout.location}"
-        locateNestedProjects="true"/>
+        rootFolder="${checkout.location}"/>
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="maven:MavenImportTask">
+    <sourceLocator
+        rootFolder="${checkout.location}/spring-boot-samples"/>
+  </setupTask>
+  <setupTask
+      xsi:type="maven:MavenImportTask">
+    <sourceLocator
+        rootFolder="${checkout.location}/spring-boot-deployment-tests"/>
   </setupTask>
   <setupTask
       xsi:type="setup.workingsets:WorkingSetTask">
@@ -120,51 +136,45 @@
             pattern="spring-boot.*"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.7/@workingSets.3 //@setupTasks.7/@workingSets.2 //@setupTasks.7/@workingSets.4 //@setupTasks.7/@workingSets.1"/>
+            excludedWorkingSet="//@setupTasks.9/@workingSets.3 //@setupTasks.9/@workingSets.2 //@setupTasks.9/@workingSets.4 //@setupTasks.9/@workingSets.1"/>
       </predicate>
     </workingSet>
     <workingSet
         name="spring-boot-tools">
       <predicate
           xsi:type="predicates:NamePredicate"
-          pattern="spring-boot-(tools|antlib|configuration-.*|loader|.*-tools|.*-layertools|.*-plugin|autoconfigure-processor|buildpack.*)"/>
+          pattern="spring-boot-(tools|antlib|configuration-.*|loader|.*-tools|.*-plugin)"/>
     </workingSet>
     <workingSet
         name="spring-boot-starters">
       <predicate
-          xsi:type="predicates:OrPredicate">
-        <operand
-            xsi:type="predicates:NamePredicate"
-            pattern="spring-boot-starter(s|-.*)"/>
-        <operand
-            xsi:type="predicates:NamePredicate"
-            pattern="spring-boot-starter"/>
-      </predicate>
+          xsi:type="predicates:NamePredicate"
+          pattern="spring-boot-starter(s|-.*)"/>
     </workingSet>
     <workingSet
-        name="spring-boot-smoke-tests">
+        name="spring-boot-samples">
       <predicate
-          xsi:type="predicates:OrPredicate">
-        <operand
-            xsi:type="predicates:NamePredicate"
-            pattern="spring-boot-smoke-test(s|-.*)"/>
-        <operand
-            xsi:type="predicates:NamePredicate"
-            pattern="spring-boot-smoke-tests-invoker"/>
-      </predicate>
+          xsi:type="predicates:NamePredicate"
+          pattern="spring-boot-sample(s|-.*)"/>
     </workingSet>
     <workingSet
         name="spring-boot-tests">
       <predicate
-          xsi:type="predicates:AndPredicate">
-        <operand
-            xsi:type="predicates:NamePredicate"
-            pattern="spring-boot-(.*-test|tests).*"/>
-        <operand
-            xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.7/@workingSets.3"/>
-      </predicate>
+          xsi:type="predicates:NamePredicate"
+          pattern="spring-boot-.*-test.*"/>
     </workingSet>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="de.loskutov.anyedit.AnyEditTools">
+    <setupTask
+        xsi:type="setup:PreferenceTask"
+        key="/instance/de.loskutov.anyedit.AnyEditTools/org.eclipse.jdt.ui.editor.tab.width"
+        value="4"/>
+    <setupTask
+        xsi:type="setup:PreferenceTask"
+        key="/instance/de.loskutov.anyedit.AnyEditTools/saveAndAddLine"
+        value="true"/>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -214,9 +224,9 @@
         key="/instance/org.eclipse.jdt.ui/smartPaste"
         value="true"/>
     <setupTask
-        xsi:type="setup:PreferenceTask"
-        key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.text.custom_templates"
-        value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&lt;templates>&lt;template autoinsert=&quot;false&quot; context=&quot;java&quot; deleted=&quot;false&quot; description=&quot;Surround code with formatter off and formatter on tags&quot; enabled=&quot;true&quot; name=&quot;noformat&quot;>// @formatter:off&#xA;$${cursor} $${line_selection}&#xA;// @formatter:on&lt;/template>&lt;/templates>"/>
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.text.custom_templates"
+          value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&lt;templates>&lt;template autoinsert=&quot;false&quot; context=&quot;java&quot; deleted=&quot;false&quot; description=&quot;Surround code with formatter off and formatter on tags&quot; enabled=&quot;true&quot; name=&quot;noformat&quot;>// @formatter:off&#xA;$${cursor} $${line_selection}&#xA;// @formatter:on&lt;/template>&lt;/templates>"/>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -260,7 +270,7 @@
     <setupTask
         xsi:type="setup:PreferenceTask"
         key="/instance/org.eclipse.ui.editors/printMarginColumn"
-        value="120"/>
+        value="90"/>
     <setupTask
         xsi:type="setup:PreferenceTask"
         key="/instance/org.eclipse.ui.editors/lineNumberRuler"
